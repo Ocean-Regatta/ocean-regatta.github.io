@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ student.github_handle }} | Profil Multi-Éditions</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="/" class="brand">
+        <span class="brand-icon">⚓</span>
+        <div>
+          <div class="brand-title">OCEAN REGATTA</div>
+          <div class="brand-subtitle">&larr; Retour au portail officiel</div>
+        </div>
+      </a>
+      <nav>
+        <a href="https://github.com/{{ student.github_handle }}" target="_blank">Profil GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div style="margin-bottom: 2rem;">
+      <h1 style="font-size: 2rem;">Navigateur : {{ student.github_handle }}</h1>
+      <p style="color: var(--text-secondary);">Palmarès multi-éditions et historique complet des runs d'évaluation</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>🎖️ Trophées et Distinctions</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+        {% for sb in badges %}
+        <div style="background: rgba(16, 31, 66, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.85rem 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 2rem;">{{ sb.badge.icon }}</span>
+          <div>
+            <div style="font-weight: bold; color: {% if sb.badge.is_exclusive %}var(--accent-gold){% else %}var(--accent-cyan){% endif %};">
+              {{ sb.badge.title }} <span style="font-size: 0.75rem; color: var(--text-secondary);">({{ sb.edition_id }})</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary);">
+              {{ sb.badge.description }}
+            </div>
+            <div style="font-size: 0.7rem; color: var(--text-secondary); margin-top: 3px;">
+              Obtenu le {{ sb.awarded_at.strftime('%d/%m/%Y') }}
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div style="color: var(--text-secondary); font-size: 0.9rem; padding: 0.5rem 0;">
+          Aucun trophée débloqué pour l'instant.
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>📋 Historique Détaillé des Runs</span>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Édition</th>
+              <th>Version Taguée</th>
+              <th>Score</th>
+              <th>Chrono</th>
+              <th>Portes</th>
+              <th>Collision</th>
+              <th>Statut</th>
+              <th>Observation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in runs %}
+            <tr>
+              <td>{{ r.submitted_at.strftime('%d/%m %H:%M') }}</td>
+              <td><span class="badge-tag" style="background: rgba(255,255,255,0.08); color: #fff;">{{ r.edition_id }}</span></td>
+              <td><code>{{ r.tag }}</code></td>
+              <td><strong>{{ r.score }} pts</strong></td>
+              <td><span style="font-family: monospace;">{{ "%.2f"|format(r.sim_time) }} s</span></td>
+              <td>{{ r.waypoints_cleared }} / {{ r.total_waypoints }}</td>
+              <td>{% if r.collision %}<span style="color: var(--danger-color); font-weight: bold;">Oui 💥</span>{% else %}<span style="color: var(--success-color);">Non</span>{% endif %}</td>
+              <td>{% if r.success %}<span class="status-pill status-success">Validé</span>{% else %}<span class="status-pill status-fail">Échec</span>{% endif %}</td>
+              <td style="font-size: 0.85rem; color: var(--text-secondary);"><em>{{ r.reason }}</em></td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="9" style="text-align: center; color: var(--text-secondary); padding: 1.5rem;">
+                Aucun run archivé.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

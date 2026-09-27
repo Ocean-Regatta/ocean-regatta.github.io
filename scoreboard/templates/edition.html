@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ edition.name }} | Official Standings</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="/" class="brand">
+        <span class="brand-icon">⚓</span>
+        <div>
+          <div class="brand-title">OCEAN REGATTA</div>
+          <div class="brand-subtitle">&larr; Retour au portail général</div>
+        </div>
+      </a>
+      <nav>
+        {% for ed in editions %}
+          <a href="/edition/{{ ed.id }}" class="{% if ed.id == edition.id %}active{% endif %}">{{ ed.year }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="edition-banner">
+      <div>
+        <h1 style="font-size: 1.8rem; margin-bottom: 0.25rem;">{{ edition.name }}</h1>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">{{ edition.description }}</p>
+      </div>
+      <div>
+        {% if edition.template_url %}
+        <a href="{{ edition.template_url }}" target="_blank" class="edition-btn active" style="padding: 0.6rem 1.2rem;">
+          📦 Dépôt Template GitHub ↗
+        </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>🏆 Classement Officiel &middot; Édition {{ edition.year }}</span>
+        <div class="search-box">
+          <input type="text" id="studentSearch" placeholder="Filtrer par équipe...">
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 60px;">Rang</th>
+              <th>Équipe</th>
+              <th>Meilleur Score</th>
+              <th>Chrono</th>
+              <th>Runs</th>
+              <th>Badges</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardBody">
+            {% for entry in leaderboard %}
+            <tr data-handle="{{ entry.student.github_handle }}">
+              <td>
+                <span class="rank-pill {% if loop.index == 1 %}rank-1{% elif loop.index == 2 %}rank-2{% elif loop.index == 3 %}rank-3{% endif %}">
+                  {{ loop.index }}
+                </span>
+              </td>
+              <td>
+                <div class="team-cell">
+                  <a href="/student/{{ entry.student.github_handle }}" class="student-link">
+                    {{ entry.student.github_handle }}
+                  </a>
+                  {% for sb in entry.badges %}
+                    <span class="badge-mini" title="{{ sb.badge.title }}: {{ sb.badge.description }}">{{ sb.badge.icon }}</span>
+                  {% endfor %}
+                </div>
+              </td>
+              <td>
+                <strong style="color: var(--accent-gold); font-size: 1.1rem;">
+                  {{ entry.best_run.score }} pts
+                </strong>
+              </td>
+              <td>
+                <span style="font-family: monospace; color: var(--accent-cyan);">{{ "%.2f"|format(entry.best_run.sim_time) }} s</span>
+              </td>
+              <td>
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">{{ entry.total_runs }}</span>
+              </td>
+              <td>
+                {% for sb in entry.badges %}
+                  <span class="badge-tag {% if sb.badge.is_exclusive %}badge-exclusive{% endif %}" title="{{ sb.badge.description }}">
+                    {{ sb.badge.icon }} {{ sb.badge.title }}
+                  </span>
+                {% else %}
+                  <span style="color: var(--text-secondary); font-size: 0.8rem;">Aucun</span>
+                {% endfor %}
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="6" style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+                Aucune participation enregistrée pour cette édition.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

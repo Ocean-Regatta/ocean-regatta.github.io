@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  scoreboard:
+    build: .
+    restart: always
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - scoreboard_data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:////app/data/scoreboard.db
+      - COMPETITION_SECRET_TOKEN=virtual_regatta_super_secret_token_2026
+
+volumes:
+  scoreboard_data:
