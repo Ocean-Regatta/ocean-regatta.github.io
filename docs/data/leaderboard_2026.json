@@ -1,7 +1,7 @@
 {
   "edition": "2026",
   "course_name": "Ocean Regatta 2026 (Channel & Sonar Pier)",
-  "last_updated": "2026-10-08T12:48:29.172720+00:00",
+  "last_updated": "2026-10-08T13:17:38.124616+00:00",
   "teams": [
     {
       "rank": 1,
@@ -39,6 +39,13 @@
           "name": "Sniper",
           "category": "Exclusive",
           "desc": "High precision navigation clearing all waypoints with minimal deviation",
+          "exclusive": true
+        },
+        {
+          "icon": "🏹",
+          "name": "Minimalist",
+          "category": "Exclusive",
+          "desc": "Course cleared with the fewest total evaluation attempts",
           "exclusive": true
         }
       ]
@@ -196,9 +203,9 @@
       "sim_time": 426.05,
       "status": "COMPLETED",
       "waypoints": "3/11",
-      "total_runs": 3,
+      "total_runs": 4,
       "success_runs": 3,
-      "last_submission": "2026-10-08T12:48:29.172720+00:00",
+      "last_submission": "2026-10-08T13:17:38.124616+00:00",
       "badges": [
         {
           "icon": "🌊",
@@ -208,17 +215,17 @@
           "exclusive": false
         },
         {
+          "icon": "⚓",
+          "name": "Davy Jones' Locker",
+          "category": "Consolation",
+          "desc": "Run terminated, collided, or timed out before clearing Gate 1",
+          "exclusive": false
+        },
+        {
           "icon": "🐢",
           "name": "Sea Turtle",
           "category": "Exclusive",
           "desc": "Most cautious and slowest navigation completing the full course",
-          "exclusive": true
-        },
-        {
-          "icon": "🏹",
-          "name": "Minimalist",
-          "category": "Exclusive",
-          "desc": "Course cleared with the fewest total evaluation attempts",
           "exclusive": true
         }
       ],
