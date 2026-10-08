@@ -19,6 +19,19 @@ Choose between two development workflows:
 
 ---
 
+## Step 0: Register Your Account
+
+Before cloning your repository and submitting code, your team must be approved in the competition participant registry:
+
+1. Navigate to the [Competitor Registration](register.md) portal (`/register/`).
+2. Fill out your GitHub username and team details to generate your registration issue on [Ocean-Regatta/ocean-regatta-2026-template](https://github.com/Ocean-Regatta/ocean-regatta-2026-template).
+3. The regatta committee (**@Teusner**) will review and approve your submission into `participants.json` within 24 hours.
+
+!!! warning "Verification Required for Automated PR Grading"
+    Simulation server resources and automated PR evaluation workflows run **only** for registered accounts listed in `participants.json`. If you open a Pull Request without prior registration, grading will not trigger! Additionally, evaluated runs adhere to a **60-minute cooldown** between submissions to prevent seed overfitting.
+
+---
+
 ## 1. Create Your Team Repository
 
 1. Navigate to the official template repository: [github.com/ocean-regatta/ocean-regatta-2026-template](https://github.com/ocean-regatta/ocean-regatta-2026-template).

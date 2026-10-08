@@ -4,6 +4,9 @@
 
 Welcome to the official portal of **Ocean Regatta**. This collegiate and engineering challenge pits autonomous navigation algorithms against complex marine environments, deploying autonomous surface vehicles (USV, Blue Robotics *BlueBoat*) and autonomous underwater vehicles (AUV, *BlueROV2*) in **Gazebo Jetty** simulation and real-world sea trials.
 
+[Register Your Team 🚤](register.md){ .md-button .md-button--primary }
+[Quick Start Guide :octicons-arrow-right-24:](quickstart.md){ .md-button }
+
 ---
 
 ## 🧭 Competition Spirit & Scope
@@ -38,6 +41,13 @@ Each year brings an all-new operational theater:
 ---
 
 ## 🚀 3-Minute Quick Start
+
+=== "0. Register Account"
+    Before opening Pull Requests, ensure your team is approved in the participant registry:
+
+    1. Visit the [Competitor Registration](register.md) portal.
+    2. Submit the prefilled GitHub Issue form to request approval from @Teusner.
+    3. Once merged into `participants.json`, automated PR grading is enabled!
 
 === "1. Create Repository"
     Create your own team repository from the official template:
