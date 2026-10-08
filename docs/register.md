@@ -68,7 +68,7 @@ flowchart LR
 <noscript>
   <div class="admonition warning" style="margin-bottom: 1.5rem;">
     <p class="admonition-title">JavaScript Disabled</p>
-    <p>JavaScript is disabled in your browser. You can still register directly by manually opening the <a href="https://github.com/Ocean-Regatta/ocean-regatta-2026-template/issues/new?template=registration_request.yml" target="_blank" rel="noopener noreferrer"><strong>GitHub Issue Registration Template ↗</strong></a> and filling out your team details.</p>
+    <p>JavaScript is disabled in your browser. You can still register directly by manually opening the <a href="https://github.com/Ocean-Regatta/ocean-regatta-2026-template/issues/new?template=registration_request.yml&title=%5BRegistration%5D%3A+New+Competitor&assignees=Teusner&body=%23%23%23+Competitor+Registration+Request%0A%0A*%20%2A%2AGitHub+Username%3A%2A%2A+%40username%0A*%20%2A%2ATeam+Name%3A%2A%2A+%0A*%20%2A%2AAffiliation%3A%2A%2A+%0A%0A%23%23%23%23+Strategy+%26+Background%0A%0A%23%23%23%23+Agreement%0A-+%5Bx%5D+I+agree+to+the+Ocean+Regatta+rules+and+cooldown+policy." target="_blank" rel="noopener noreferrer"><strong>GitHub Issue Registration Template ↗</strong></a> and filling out your team details.</p>
   </div>
 </noscript>
 
@@ -180,8 +180,8 @@ flowchart LR
   <!-- Fallback footer link -->
   <div class="reg-fallback-footer">
     Prefer manual submission without auto-fill?
-    <a href="https://github.com/Ocean-Regatta/ocean-regatta-2026-template/issues/new?template=registration_request.yml" target="_blank" rel="noopener noreferrer">
-      Open the blank GitHub Issue Template &rarr;
+    <a href="https://github.com/Ocean-Regatta/ocean-regatta-2026-template/issues/new?template=registration_request.yml&title=%5BRegistration%5D%3A+New+Competitor&assignees=Teusner&body=%23%23%23+Competitor+Registration+Request%0A%0A*%20%2A%2AGitHub+Username%3A%2A%2A+%40username%0A*%20%2A%2ATeam+Name%3A%2A%2A+%0A*%20%2A%2AAffiliation%3A%2A%2A+%0A%0A%23%23%23%23+Strategy+%26+Background%0A%0A%23%23%23%23+Agreement%0A-+%5Bx%5D+I+agree+to+the+Ocean+Regatta+rules+and+cooldown+policy." target="_blank" rel="noopener noreferrer">
+      Open the prefilled GitHub Issue Template &rarr;
     </a>
   </div>
 </div>
@@ -263,11 +263,27 @@ function handleRegistrationSubmit(e) {
     return false;
   }
 
-  // 4. Assemble the GitHub Issue Form URL
+  // 4. Assemble the GitHub Issue Body & URL
   const username = cleanUsername;
   const affiliation = affiliationInput.value ? affiliationInput.value.trim() : "";
+  const strategy = strategyInput.value ? strategyInput.value.trim() : "";
 
-  const issueUrl = `https://github.com/Ocean-Regatta/ocean-regatta-2026-template/issues/new?template=registration_request.yml&title=%5BRegistration%5D%3A+%40${username}&github_username=${username}&team_name=${encodeURIComponent(teamName)}&affiliation=${encodeURIComponent(affiliation)}`;
+  const issueBody = [
+    "### 🚤 Competitor Registration Request",
+    "",
+    `* **GitHub Username:** @${username}`,
+    `* **Team / Competitor Name:** ${teamName}`,
+    `* **Affiliation / Institution:** ${affiliation || "Independent / Unspecified"}`,
+    "",
+    "#### 🧠 Strategy & Technical Approach",
+    strategy || "_No initial strategy or background provided._",
+    "",
+    "#### 📋 Agreement & Policy",
+    "- [x] I agree to the Ocean Regatta rules and cooldown policy (60-minute evaluation cooldown).",
+    "- [x] Requesting participant approval in `participants.json` by the regatta committee (@Teusner)."
+  ].join("\n");
+
+  const issueUrl = `https://github.com/Ocean-Regatta/ocean-regatta-2026-template/issues/new?template=registration_request.yml&title=%5BRegistration%5D%3A+%40${username}&assignees=Teusner&github_username=${username}&team_name=${encodeURIComponent(teamName)}&affiliation=${encodeURIComponent(affiliation)}&body=${encodeURIComponent(issueBody)}`;
 
   // Show dynamic feedback & update fallback anchor
   fallbackAnchor.href = issueUrl;
