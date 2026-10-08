@@ -1,7 +1,7 @@
 {
   "edition": "2026",
   "course_name": "Ocean Regatta 2026 (Channel & Sonar Pier)",
-  "last_updated": "2026-10-08T13:17:38.124616+00:00",
+  "last_updated": "2026-10-08T13:55:03.354976+00:00",
   "teams": [
     {
       "rank": 1,
@@ -203,9 +203,9 @@
       "sim_time": 426.05,
       "status": "COMPLETED",
       "waypoints": "3/11",
-      "total_runs": 4,
+      "total_runs": 5,
       "success_runs": 3,
-      "last_submission": "2026-10-08T13:17:38.124616+00:00",
+      "last_submission": "2026-10-08T13:55:03.354976+00:00",
       "badges": [
         {
           "icon": "🌊",
